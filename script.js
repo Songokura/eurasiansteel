@@ -156,7 +156,8 @@
     var crane = $('#crane'), trolley = $('#trolley'), hoist = $('#hoist'), hook = $('#hook'), rope = $('#rope');
     var ropeY2 = +rope.getAttribute('y2'), px = +rope.getAttribute('x1'), py = +rope.getAttribute('y1');
     var st = { A: G.A0, B: G.B0, h: G.H0, sw: 0 };
-    var idle = { a: G.A0 - 2, b: 0 }, scrollP = 0, playing = false, visible = true;
+    /* в покое кран ходит в свободном пролёте между метизами и воротами: над бирками стеллажей он их перекрывал */
+    var idle = { a: G.A0 + 10, b: 0 }, scrollP = 0, playing = false, visible = true;
     function apply() {
       var dA = st.A - G.A0, dB = st.B - G.B0, dh = st.h - G.H0;
       crane.setAttribute('transform', 'translate(' + (dA * va[0]).toFixed(2) + ' ' + (dA * va[1]).toFixed(2) + ')');
@@ -176,13 +177,13 @@
     if (!reduce) {
       life.to(st, { sw: 1.4, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 0);
       gsap.set(st, { sw: -1.4 });
-      life.to(idle, { a: G.A0 + 3, duration: 11, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 0);
+      life.to(idle, { a: G.A0 + 13, duration: 11, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 0);
       life.to(idle, { b: 1, duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1 }, 0);
       life.to('#fork', { x: 11.5 * va[0], y: 11.5 * va[1], duration: 10, ease: 'sine.inOut', yoyo: true, repeat: -1, repeatDelay: 1.4 }, 0);
     }
     gsap.ticker.add(function () {
       if (!visible) return;
-      if (!playing) { st.A += ((idle.a + scrollP * 7) - st.A) * 0.08; st.B += ((G.B0 + (idle.b || 0) * 2.5 - 1.2) - st.B) * 0.05; }
+      if (!playing) { st.A += ((idle.a + scrollP * 5) - st.A) * 0.08; st.B += ((G.B0 + (idle.b || 0) * 2.5 - 1.2) - st.B) * 0.05; }
       apply();
     });
     ScrollTrigger.create({ trigger: '.hero', start: 'top top', end: 'bottom top', onUpdate: function (s) { scrollP = s.progress; } });
@@ -264,7 +265,7 @@
       drop(tl, 'pipes', 1.53, '#tr-pipes');
       tl.call(phase, [3]);
       tl.addLabel('ship');
-      tl.to(st, { A: 15, B: 8.5, h: G.H0, duration: 1.4, ease: 'power2.inOut' }, 'ship');
+      tl.to(st, { A: 23, B: 8.5, h: G.H0, duration: 1.4, ease: 'power2.inOut' }, 'ship'); /* финальная стоянка - в свободном пролёте, не над бирками */
       tl.to('#truck', { x: 17 * va[0], y: 17 * va[1], duration: 2.6, ease: 'power2.in' }, 'ship');
       tl.call(function () { boardKey('scene.board.done'); phase(4); gsap.fromTo(board, { opacity: 0 }, { opacity: 1, duration: 0.25, repeat: 4, yoyo: true }); }, null, 'ship+=1.5');
       /* возврат в исходное */
