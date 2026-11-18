@@ -344,7 +344,6 @@
         tl.fromTo(ph, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.0, ease: 'power2.inOut' }, 1.9);
         tl.fromTo($('img', ph), { scale: 1.08 }, { scale: 1, duration: 1.6, ease: E }, 1.9);
       }
-      gsap.to($('.bay-art', bay), { backgroundPosition: '0 40px', ease: 'none', scrollTrigger: { trigger: bay, scrub: true } });
     });
 
     /* сортовой */
