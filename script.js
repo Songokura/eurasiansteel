@@ -328,10 +328,17 @@
       if (lead) tl.from(lead, { y: 20, opacity: 0, duration: 0.6, ease: E }, 0.35);
     });
 
+    /* раздел с фото: открывается при въезде сверху и снизу, закрывается обратно, когда раздел ушёл с экрана */
+    function both(trigger, start, end) {
+      var on = function (st) { st.animation.timeScale(1).play(); };
+      var off = function (st) { st.animation.timeScale(2.5).reverse(); };
+      return { trigger: trigger, start: start, end: end || 'bottom 15%', toggleActions: 'none none none none', onEnter: on, onEnterBack: on, onLeave: off, onLeaveBack: off };
+    }
+
     /* каталог: пачка опускается на стропах и встаёт на подкладки */
     $$('.bay').forEach(function (bay) {
       var lift = $('.lift', bay), slings = $$('.sling', bay), body = $('.bay-body', bay);
-      var tl = gsap.timeline({ scrollTrigger: { trigger: bay, start: 'top 72%' } });
+      var tl = gsap.timeline({ scrollTrigger: both(bay, 'top 72%') });
       tl.from(lift, { yPercent: -70, duration: 1.1, ease: 'power2.out' });
       tl.fromTo(lift, { rotation: -1.6 }, { rotation: 0, duration: 1.5, ease: 'elastic.out(1,0.4)', transformOrigin: '50% -40%' }, 0.2);
       tl.to(slings, { opacity: 0, scaleY: 0.2, duration: 0.5, ease: 'power2.in' }, 1.25);
@@ -347,15 +354,16 @@
     });
 
     /* сортовой */
-    gsap.from('.scard', { y: 50, opacity: 0, duration: 0.7, stagger: 0.08, ease: E, scrollTrigger: { trigger: '.sort-grid', start: 'top 80%' } });
-    gsap.from('.scard .sg-s', { strokeDashoffset: 1, fillOpacity: 0, duration: 0.9, stagger: 0.06, ease: 'power2.inOut', scrollTrigger: { trigger: '.sort-grid', start: 'top 70%' } });
-
-    if ($('.scard-photo')) gsap.fromTo('.scard-photo', { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, delay: 1.2, stagger: 0.12, ease: 'power2.inOut', scrollTrigger: { trigger: '.sort-grid', start: 'top 70%' } });
+    var stl = gsap.timeline({ scrollTrigger: both('.sort-grid', 'top 75%') });
+    stl.from('.scard', { y: 50, opacity: 0, duration: 0.7, stagger: 0.08, ease: E }, 0);
+    stl.from('.scard .sg-s', { strokeDashoffset: 1, fillOpacity: 0, duration: 0.9, stagger: 0.06, ease: 'power2.inOut' }, 0.3);
+    if ($('.scard-photo')) stl.fromTo('.scard-photo', { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, stagger: 0.12, ease: 'power2.inOut' }, 1.2);
 
     /* склад: кадры опускаются шторой по очереди */
     if ($('.yard-grid')) {
-      gsap.fromTo('.yp', { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.0, stagger: 0.1, ease: E, scrollTrigger: { trigger: '.yard-grid', start: 'top 80%' } });
-      gsap.fromTo('.yp img', { scale: 1.1 }, { scale: 1, duration: 1.6, stagger: 0.1, ease: E, scrollTrigger: { trigger: '.yard-grid', start: 'top 80%' } });
+      var ytl = gsap.timeline({ scrollTrigger: both('.yard-grid', 'top 80%', 'bottom 10%') });
+      ytl.fromTo('.yp', { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.0, stagger: 0.1, ease: E }, 0);
+      ytl.fromTo('.yp img', { scale: 1.1 }, { scale: 1, duration: 1.6, stagger: 0.1, ease: E }, 0);
     }
 
     /* услуги: карточки висят на балке, тележка идёт по рельсу */
