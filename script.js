@@ -338,12 +338,26 @@
       tl.from(body.children, { y: 26, opacity: 0, duration: 0.6, stagger: 0.07, ease: E }, 0.25);
       tl.from($$('.sg-s', bay), { strokeDashoffset: 1, fillOpacity: 0, duration: 1.0, stagger: 0.08, ease: 'power2.inOut' }, 0.5);
       tl.from($$('.sg-d,.sg-t,.sg-h,.sg-dot', bay), { opacity: 0, duration: 0.4, stagger: 0.02 }, 1.1);
+      /* фото склада: штора опускается от балки, когда пачка встала на подкладки */
+      var ph = $('.bay-photo', bay);
+      if (ph) {
+        tl.fromTo(ph, { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.0, ease: 'power2.inOut' }, 1.9);
+        tl.fromTo($('img', ph), { scale: 1.08 }, { scale: 1, duration: 1.6, ease: E }, 1.9);
+      }
       gsap.to($('.bay-art', bay), { backgroundPosition: '0 40px', ease: 'none', scrollTrigger: { trigger: bay, scrub: true } });
     });
 
     /* сортовой */
     gsap.from('.scard', { y: 50, opacity: 0, duration: 0.7, stagger: 0.08, ease: E, scrollTrigger: { trigger: '.sort-grid', start: 'top 80%' } });
     gsap.from('.scard .sg-s', { strokeDashoffset: 1, fillOpacity: 0, duration: 0.9, stagger: 0.06, ease: 'power2.inOut', scrollTrigger: { trigger: '.sort-grid', start: 'top 70%' } });
+
+    if ($('.scard-photo')) gsap.fromTo('.scard-photo', { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.9, delay: 1.2, stagger: 0.12, ease: 'power2.inOut', scrollTrigger: { trigger: '.sort-grid', start: 'top 70%' } });
+
+    /* склад: кадры опускаются шторой по очереди */
+    if ($('.yard-grid')) {
+      gsap.fromTo('.yp', { clipPath: 'inset(0% 0% 100% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.0, stagger: 0.1, ease: E, scrollTrigger: { trigger: '.yard-grid', start: 'top 80%' } });
+      gsap.fromTo('.yp img', { scale: 1.1 }, { scale: 1, duration: 1.6, stagger: 0.1, ease: E, scrollTrigger: { trigger: '.yard-grid', start: 'top 80%' } });
+    }
 
     /* услуги: карточки висят на балке, тележка идёт по рельсу */
     gsap.fromTo('.serv-crab', { x: 0 }, { x: function () { return $('.serv-rail').offsetWidth - 96; }, ease: 'none', scrollTrigger: { trigger: '.serv', start: 'top 70%', end: 'bottom 40%', scrub: 0.6, invalidateOnRefresh: true } });

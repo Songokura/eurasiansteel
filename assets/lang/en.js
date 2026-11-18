@@ -53,7 +53,7 @@ window.SITE_EN = {
 "f.item":"Item (what you need)","f.item_ph":"For example: rebar, sheet, hollow section","f.vol":"Volume or tonnage","f.vol_ph":"Tonnes, metres or pieces","f.cut":"Cutting needed","f.yes":"Yes","f.no":"No","f.city":"Delivery - city","f.city_ph":"City or pickup","f.phone":"Phone",
 "f.note":"You can also send your request to info.eurasiansteel@gmail.com - attach the specification as a file.",
 "f.ok":"Request received. A manager will contact you during working hours: Mon-Fri, 9:00 to 18:00.",
-"cont.kicker":"CONTACTS","cont.h2":"Office and contacts","cont.addr_l":"Address","cont.addr":"5/3 Pushkin St.","cont.tel_l":"Phone and WhatsApp","cont.time_l":"Working hours","cont.time":"Mon-Fri 9:00 to 18:00, Sat-Sun - closed","cont.route":"Get directions",
+"cont.kicker":"CONTACTS","cont.h2":"Office and contacts","cont.addr_l":"Warehouse address","cont.addr":"55/3 Pushkin St.","cont.tel_l":"Phone and WhatsApp","cont.time_l":"Working hours","cont.time":"Mon-Fri 9:00 to 18:00, Sat-Sun - closed","cont.route":"Get directions",
 "ftr.line":"Rolled metal and fasteners, wholesale and retail. Delivery throughout Kazakhstan.","ftr.balka":"Beam and channel","ftr.metizy":"Fasteners and fittings","ftr.nerzh":"Stainless and non-ferrous","ftr.sort":"Long products","ftr.time":"Mon-Fri 9:00-18:00",
 "ftr.legal":"Eurasian Steel Company LLP, BIN 260940015617","ftr.copy":"© 2026 Eurasian Steel Company LLP",
 "alt.armatura":"Rebar bundles on timber bearers","alt.list":"Stacks of sheet metal","alt.truby":"Round and hollow-section steel pipes","alt.balka":"Stacked I-beams and channels","alt.metizy":"Crates of fasteners, wire coils, a bolt, a nut and a washer","alt.nerzh":"Stainless sheet and pipes, aluminium, copper and brass bars",
@@ -69,6 +69,7 @@ window.SITE_EN = {
 "wa.s3":"Hello! I am interested in steel flat bar. Please confirm availability and price. Width, thickness, quantity: ",
 "wa.s4":"Hello! I am interested in metal angle. Please confirm availability and price. Flange size, thickness, quantity: ",
 "wa.s5":"Hello! I am interested in metal wire. Please confirm availability and price. Diameter, quantity: ",
+"yard.kicker":"WAREHOUSE","yard.h2":"Warehouse in Astana: 55/3 Pushkin St.","yard.lead":"Rolled metal is stored in bundles on an open yard with gantry cranes. Loaded by crane straight into the customer's truck.","yard.route":"Warehouse on 2GIS map","yard.a":"Gantry crane loading rolled metal into a truck at the warehouse","yard.b":"Rows of steel pipe bundles on the warehouse yard","yard.c":"Large diameter pipes at the warehouse","yard.d":"Tagged steel pipe bundles, gantry crane in the background","yard.e":"Square and rectangular tubes in bundles","ph.armatura":"Rebar bundles at the company warehouse","ph.list":"Bundles of steel sheet","ph.truby":"Steel pipe bundles at the company warehouse","ph.balka":"I-beams in stacks","ph.krug":"Round steel bar bundles at the company warehouse","ph.polosa":"Flat steel bar in bundles","ph.ugolok":"Steel angle in a bundle",
 "wa.meet":"Hello! We would like to discuss the terms of cooperation in person. Convenient time: ",
 "wa.form.head":"Hello! Request for rolled metal.","wa.form.item":"Item","wa.form.vol":"Volume","wa.form.cut":"Cutting","wa.form.city":"Delivery","wa.form.phone":"Phone"
 };

@@ -453,3 +453,32 @@ html[lang="kk"] .hero-h,html[lang="en"] .hero-h{font-size:clamp(34px,3.7vw,62px)
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
 @media (max-width:380px){.logo{gap:7px}.logo .logo-mark{height:30px}.logo-text{font-size:13px}}
+
+/* фото клиента в каталоге: сначала рисунок опускается на стропах, затем кадр склада опускается от балки как штора */
+.bay-photo,.scard-photo{position:absolute;inset:0;z-index:2;border-radius:inherit;overflow:hidden;clip-path:inset(0 0 0 0)}
+.bay-photo img,.scard-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.bay.has-photo .bay-art::after{z-index:1} /* балка видна, пока опускается рисунок; кадр закрывает её целиком */
+.scard.has-photo .scard-art{position:relative;border-radius:14px;overflow:hidden;background:var(--ice)}
+/* значок сечения - под названием */
+.scard{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto auto 1fr;column-gap:10px}
+.scard-art{grid-column:1/-1;margin:0 0 14px}
+.scard-sign{position:static;grid-column:2;grid-row:3;align-self:start;width:72px;margin-top:8px}
+.scard h3{grid-column:1/-1;grid-row:2}
+.scard .dims{grid-column:1;grid-row:3;margin-top:8px}
+.scard .btn{grid-column:1/-1;grid-row:4;align-self:end;margin-top:14px}
+@media (max-width:560px){.scard{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto 1fr}.scard-sign{grid-column:1;grid-row:4;width:60px;margin:8px 0 12px}.scard .btn{grid-row:5}}
+
+/* склад */
+.yard.dark{border-top:1px solid rgba(255,255,255,.1)}
+.yard-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,clamp(200px,19vw,380px));grid-template-areas:"a b b c" "a d e c";gap:clamp(8px,1vw,16px);margin-top:clamp(36px,4vw,64px)}
+.yp{margin:0;position:relative;overflow:hidden;border-radius:var(--r);background:var(--navy-2);min-width:0}
+.yp picture,.yp img{display:block;width:100%;height:100%}
+.yp img{object-fit:cover;height:100%}
+.y-a{grid-area:a}.y-b{grid-area:b}.y-c{grid-area:c}.y-d{grid-area:d}.y-e{grid-area:e}
+.y-a img{object-position:58% 50%}.y-c img{object-position:60% 60%}.y-b img{object-position:50% 70%}
+.yard-route{display:inline-flex;align-items:center;gap:10px;margin-top:28px;font:500 15px/1.3 var(--f-m);color:#fff;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:4px}
+.yard-route .ic{width:18px;height:18px;flex:none}
+@media (hover:hover){.yard-route:hover{border-color:#fff}.yp img{transition:transform .9s var(--e)}.yp:hover img{transform:scale(1.04)}}
+@media (max-width:900px){
+  .yard-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,clamp(160px,42vw,340px));grid-template-areas:"a b" "a d" "c e"}
+}
