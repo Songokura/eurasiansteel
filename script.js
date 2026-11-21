@@ -35,6 +35,18 @@
     $$('a[data-wa]').forEach(function (a) { a.href = waUrl(waText(a)); });
   }
 
+  /* ---------- конверсии Google Ads ---------- */
+  function fireConv(key) {
+    if (typeof window.gtag_report_conversion !== 'function' || !window.AW_CONV) return;
+    var sendTo = window.AW_CONV[key];
+    if (sendTo) window.gtag_report_conversion(undefined, sendTo);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="tel:"], a[href*="wa.me"]') : null;
+    if (!a) return;
+    fireConv(a.getAttribute('href').indexOf('tel:') === 0 ? 'phone' : 'contact');
+  });
+
   /* ---------- языки ---------- */
   var LANGS = { ru: null, kk: 'SITE_KK', en: 'SITE_EN' };
   var ruStore = null;
@@ -439,7 +451,8 @@
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var f = form.elements, bad = false;
-      [f.item, f.phone].forEach(function (i) {
+      var item = f.namedItem('item'); /* у коллекции elements есть свой метод item(), поле по имени не достать */
+      [item, f.phone].forEach(function (i) {
         var empty = !i.value.trim() || (i === f.phone && i.value.replace(/\D/g, '').length < 10);
         i.classList.toggle('is-err', empty); i.setAttribute('aria-invalid', String(empty)); if (empty && !bad) { bad = true; i.focus(); }
       });
@@ -447,12 +460,13 @@
       var cut = f.cut.value === 'yes' ? T('f.yes', 'Да').toLowerCase() : T('f.no', 'Нет').toLowerCase();
       var text = [
         T('wa.form.head', 'Здравствуйте! Заявка на металлопрокат.'),
-        T('wa.form.item', 'Позиция') + ': ' + f.item.value.trim(),
+        T('wa.form.item', 'Позиция') + ': ' + item.value.trim(),
         T('wa.form.vol', 'Объём') + ': ' + (f.volume.value.trim() || '-'),
         T('wa.form.cut', 'Резка') + ': ' + cut,
         T('wa.form.city', 'Доставка') + ': ' + (f.city.value.trim() || '-'),
         T('wa.form.phone', 'Телефон') + ': ' + f.phone.value.trim()
       ].join('\n');
+      fireConv('form');
       window.open(waUrl(text), '_blank', 'noopener');
       ok.hidden = false;
       if (hasGsap && !reduce) gsap.from(ok, { y: 10, opacity: 0, duration: 0.4 });
